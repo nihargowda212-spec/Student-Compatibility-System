@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personality Test - Student Compatibility System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="test-header">
+            <h1>Step Into Self-Discovery!</h1>
+            <div class="instruction-box">
+                <p><strong>Note:</strong> Answer 40 quick questions to understand your strengths and preferences. This helps us match you with the best-fit roles.</p>
+                <ul>
+                    <li>There are no right or wrong answers.</li>
+                    <li>Answer honestly and instinctively—this helps us suggest more suitable opportunities and better career guidance.</li>
+                    <li>You can retake the assessment after 10 days to see how your profile evolves.</li>
+                    <li>Your insights are private to you (not shown to colleges or enterprises unless you choose to share).</li>
+                </ul>
+            </div>
+            
+            <div class="invite-section">
+                <label for="inviteCode">Have an invite code? (Optional)</label>
+                <input type="text" id="inviteCode" placeholder="Enter invite code">
+            </div>
+        </div>
+
+        <div class="category-indicator" id="categoryIndicator"></div>
+
+        <div class="test-container">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <div class="question-container" id="questionContainer"></div>
+            <div class="navigation-buttons">
+                <button id="prevBtn" class="btn btn-secondary" style="display: none;">Previous</button>
+                <button id="nextBtn" class="btn btn-primary">Next</button>
+                <button id="submitBtn" class="btn btn-success" style="display: none;">Submit Test</button>
+            </div>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='js/test.js') }}"></script>
+</body>
+</html>
+
+
+
+

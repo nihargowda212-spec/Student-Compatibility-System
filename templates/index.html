@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Compatibility System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="home-container">
+        <!-- Animated Background Elements -->
+        <div class="bg-orb bg-orb-1"></div>
+        <div class="bg-orb bg-orb-2"></div>
+        <div class="bg-orb bg-orb-3"></div>
+        
+        <!-- Navigation -->
+        <nav class="home-nav">
+            <div class="nav-brand">
+                <span class="brand-icon">🎓</span>
+                <span class="brand-text">StudentMatch</span>
+            </div>
+            <div class="nav-actions">
+                <a href="/login" class="nav-link">Sign In</a>
+                <a href="/register" class="nav-btn">Get Started</a>
+            </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <span class="badge-icon">✨</span>
+                    <span>Discover Your Perfect Study Partner</span>
+                </div>
+                <h1 class="hero-title">
+                    Find Your <span class="gradient-text">Compatible</span> Study Partner
+                </h1>
+                <p class="hero-description">
+                    Take our comprehensive 40-question personality assessment and connect with students who complement your learning style. Build stronger study partnerships based on compatibility.
+                </p>
+                <div class="hero-cta">
+                    <a href="/register" class="btn btn-hero-primary">
+                        <span>Start Assessment</span>
+                        <span class="btn-icon">→</span>
+                    </a>
+                    <a href="/login" class="btn btn-hero-secondary">
+                        <span>Already a member?</span>
+                    </a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">10K+</div>
+                        <div class="stat-label">Students</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">95%</div>
+                        <div class="stat-label">Match Rate</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">40</div>
+                        <div class="stat-label">Questions</div>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="floating-card card-1">
+                    <div class="card-icon">🧠</div>
+                    <div class="card-title">Mindset</div>
+                    <div class="card-value">85%</div>
+                </div>
+                <div class="floating-card card-2">
+                    <div class="card-icon">⚡</div>
+                    <div class="card-title">Resilience</div>
+                    <div class="card-value">92%</div>
+                </div>
+                <div class="floating-card card-3">
+                    <div class="card-icon">🤝</div>
+                    <div class="card-title">Interactions</div>
+                    <div class="card-value">78%</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="features-section">
+            <div class="section-header">
+                <h2 class="section-title">How It Works</h2>
+                <p class="section-subtitle">Simple steps to find your perfect study partner</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-number">01</div>
+                    <div class="feature-icon">📝</div>
+                    <h3 class="feature-title">Take Assessment</h3>
+                    <p class="feature-description">Complete our 40-question personality test covering 5 key dimensions of your learning style.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-number">02</div>
+                    <div class="feature-icon">📊</div>
+                    <h3 class="feature-title">Get Insights</h3>
+                    <p class="feature-description">Receive detailed personality insights with visual charts and personalized recommendations.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-number">03</div>
+                    <div class="feature-icon">🔗</div>
+                    <h3 class="feature-title">Find Matches</h3>
+                    <p class="feature-description">Connect with compatible students based on personality compatibility scores.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <div class="cta-card">
+                <div class="cta-content">
+                    <h2 class="cta-title">Ready to Find Your Study Partner?</h2>
+                    <p class="cta-description">Join thousands of students who have discovered their perfect learning match</p>
+                    <a href="/register" class="btn btn-cta">
+                        <span>Get Started Free</span>
+                        <span class="btn-icon">→</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
+
+
+

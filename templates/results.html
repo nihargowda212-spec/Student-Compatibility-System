@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personality Insights - Student Compatibility System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="page-shell">
+        <header class="results-hero glass-card">
+            <div class="hero-content">
+                <span class="hero-kicker">Assessment Complete</span>
+                <h1>Here’s your personalised insight recap</h1>
+                <p class="hero-subtitle">Discover how your strengths translate into study partnerships and future career paths.</p>
+                <div class="hero-actions">
+                    <a href="/test" class="btn btn-outline">Retake Assessment</a>
+                    <a href="/invite" class="btn btn-primary btn-pill">Invite a Friend</a>
+                </div>
+            </div>
+            <div class="hero-score-card">
+                <h2>Overall Balance</h2>
+                <div class="score-ring">
+                    <div class="score-value" id="overallScoreValue">--</div>
+                    <div class="score-status" id="overallScoreStatus">Pending</div>
+                </div>
+                <p class="score-caption" id="overallScoreLabel">Complete the personality test to view your aligned score.</p>
+            </div>
+        </header>
+
+        <section class="summary-section glass-card">
+            <div class="section-heading">
+                <div>
+                    <h2>Trait Snapshot</h2>
+                    <p>Each score is scaled 0 – 100, reflecting how strongly you demonstrate the trait.</p>
+                </div>
+                <span class="updated-pill" id="lastUpdatedLabel">Awaiting first assessment</span>
+            </div>
+            <div class="score-grid" id="scoreGrid">
+                <p class="empty-hint">Take the assessment to unlock your personalised dashboard.</p>
+            </div>
+        </section>
+
+        <section class="results-layout">
+            <div class="chart-panel glass-card">
+                <div class="panel-heading">
+                    <h2>Personality Radar</h2>
+                    <p>Visualise how your traits balance across core dimensions.</p>
+                </div>
+                <canvas id="personalityChart"></canvas>
+            </div>
+            <div class="insights-stack">
+                <div class="insight-box glass-card">
+                    <div class="panel-heading">
+                        <h2>Here’s What We Noticed</h2>
+                        <span class="tag neutral" id="insightTag">Overview</span>
+                    </div>
+                    <div id="noticedContent" class="insight-content">
+                        <p>Not enough data to compute trends.</p>
+                    </div>
+                </div>
+                <div class="insight-box glass-card">
+                    <div class="panel-heading">
+                        <h2>Action Plan</h2>
+                        <span class="tag action">Next Steps</span>
+                    </div>
+                    <div id="actionPlanContent" class="insight-content">
+                        <p>Complete the personality test to get personalised recommendations.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="compatibility-deck glass-card" id="compatibilitySection" style="display: none;">
+            <div class="panel-heading">
+                <h2>Compatibility Matches</h2>
+                <p>Compare your profile with invited peers to find study partners with complementary strengths.</p>
+            </div>
+            <div class="compatibility-grid" id="compatibilityResults"></div>
+        </section>
+    </div>
+    <script src="{{ url_for('static', filename='js/results.js') }}"></script>
+</body>
+</html>
+
+
+
