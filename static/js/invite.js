@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const generateBtn = document.getElementById('generateBtn');
     const copyBtn = document.getElementById('copyBtn');
     const inviteCodeDisplay = document.getElementById('inviteCodeDisplay');
+    const whatsappBtn = document.getElementById('whatsappBtn');
     let currentInviteCode = '';
 
     generateBtn.addEventListener('click', async function() {
@@ -12,7 +13,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
-                }
+                },
+                credentials: 'include'
             });
 
             const data = await response.json();
@@ -20,15 +22,18 @@ document.addEventListener('DOMContentLoaded', function() {
             if (response.ok) {
                 currentInviteCode = data.invite_code;
                 inviteCodeDisplay.innerHTML = `
-                    <p style="margin-bottom: 10px; color: #b0b0b0;">Your Invite Code:</p>
+                    <p style="margin-bottom: 10px; color: #475569;">Your Invite Code:</p>
                     <div style="font-size: 2em; font-weight: bold; letter-spacing: 8px; color: #667eea;">
                         ${currentInviteCode}
                     </div>
-                    <p style="margin-top: 10px; color: #b0b0b0; font-size: 0.9em;">
+                    <p style="margin-top: 10px; color: #64748b; font-size: 0.9em;">
                         Share this code with a friend to compare your compatibility!
                     </p>
                 `;
                 copyBtn.style.display = 'block';
+                if (whatsappBtn) {
+                    whatsappBtn.style.display = 'block';
+                }
             } else {
                 alert(data.error || 'Failed to generate invite code.');
             }
@@ -55,7 +60,21 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
     });
+
+    if (whatsappBtn) {
+        whatsappBtn.addEventListener('click', function() {
+            if (!currentInviteCode) {
+                alert('Generate an invite code first.');
+                return;
+            }
+            const baseUrl = window.location.origin;
+            const message = `Join me on StudentMatch! Register and enter invite code ${currentInviteCode} so we can compare our personality profiles. ${baseUrl}`;
+            const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+        });
+    }
 });
+
 
 
 

@@ -26,7 +26,9 @@ document.addEventListener('DOMContentLoaded', async function() {
 
 async function loadQuestions() {
     try {
-        const response = await fetch('/api/questions');
+        const response = await fetch('/api/questions', {
+            credentials: 'include'
+        });
         const data = await response.json();
         questions = data.questions;
     } catch (error) {
@@ -228,6 +230,7 @@ async function submitTest() {
             headers: {
                 'Content-Type': 'application/json'
             },
+            credentials: 'include',
             body: JSON.stringify({
                 responses: responsesArray,
                 invite_code: inviteCode || null
@@ -246,6 +249,7 @@ async function submitTest() {
         alert('An error occurred. Please try again.');
     }
 }
+
 
 
 

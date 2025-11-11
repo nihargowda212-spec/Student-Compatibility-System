@@ -7,6 +7,7 @@ import secrets
 import string
 from datetime import datetime
 import math
+from decimal import Decimal
 
 app = Flask(__name__)
 app.secret_key = 'your-secret-key-change-in-production'
@@ -344,14 +345,21 @@ def get_personality_scores():
         cursor = conn.cursor(dictionary=True)
         cursor.execute("""
             SELECT mindset_score, self_management_score, interactions_score, 
-                   personality_score, resilience_score
+                   personality_score, resilience_score, calculated_at
             FROM personality_scores WHERE user_id = %s
         """, (user_id,))
         scores = cursor.fetchone()
         conn.close()
         
         if scores:
-            return jsonify(scores), 200
+            normalized = {}
+            for key, value in scores.items():
+                if isinstance(value, Decimal):
+                    normalized[key] = float(value)
+                else:
+                    normalized[key] = value
+            normalized['username'] = session.get('username')
+            return jsonify(normalized), 200
         else:
             return jsonify({'error': 'No scores found. Please complete the test first.'}), 404
     except Error as e:
@@ -388,6 +396,87 @@ def get_compatibility():
         results = cursor.fetchall()
         conn.close()
         return jsonify({'compatibility_results': results}), 200
+    except Error as e:
+        conn.close()
+        return jsonify({'error': str(e)}), 500
+
+
+@app.route('/api/compatibility/<int:other_user_id>', methods=['GET'])
+def get_compatibility_detail(other_user_id):
+    if 'user_id' not in session:
+        return jsonify({'error': 'Not authenticated'}), 401
+    
+    user_id = session['user_id']
+    if user_id == other_user_id:
+        return jsonify({'error': 'Cannot compare with yourself'}), 400
+    
+    conn = get_db_connection()
+    if not conn:
+        return jsonify({'error': 'Database connection failed'}), 500
+    
+    try:
+        cursor = conn.cursor(dictionary=True)
+        
+        # Ensure compatibility record exists
+        cursor.execute("""
+            SELECT compatibility_score
+            FROM compatibility_results
+            WHERE (user_a_id = %s AND user_b_id = %s)
+               OR (user_a_id = %s AND user_b_id = %s)
+        """, (user_id, other_user_id, other_user_id, user_id))
+        compatibility = cursor.fetchone()
+        if not compatibility:
+            conn.close()
+            return jsonify({'error': 'Compatibility data not found'}), 404
+        
+        # Fetch usernames
+        cursor.execute("SELECT username FROM users WHERE id = %s", (other_user_id,))
+        other_user = cursor.fetchone()
+        if not other_user:
+            conn.close()
+            return jsonify({'error': 'User not found'}), 404
+        
+        cursor.execute("""
+            SELECT mindset_score, self_management_score, interactions_score, 
+                   personality_score, resilience_score, calculated_at
+            FROM personality_scores WHERE user_id = %s
+        """, (user_id,))
+        user_scores = cursor.fetchone()
+        
+        cursor.execute("""
+            SELECT mindset_score, self_management_score, interactions_score, 
+                   personality_score, resilience_score, calculated_at
+            FROM personality_scores WHERE user_id = %s
+        """, (other_user_id,))
+        partner_scores = cursor.fetchone()
+        conn.close()
+        
+        if not user_scores or not partner_scores:
+            return jsonify({'error': 'Personality scores not found for both users'}), 404
+        
+        def normalize_scores(payload):
+            normalized_payload = {}
+            for key, value in payload.items():
+                if isinstance(value, Decimal):
+                    normalized_payload[key] = float(value)
+                else:
+                    normalized_payload[key] = value
+            return normalized_payload
+        
+        response = {
+            'user': {
+                'user_id': user_id,
+                'username': session.get('username'),
+                'scores': normalize_scores(user_scores)
+            },
+            'partner': {
+                'user_id': other_user_id,
+                'username': other_user['username'],
+                'scores': normalize_scores(partner_scores)
+            },
+            'compatibility_score': float(compatibility['compatibility_score'])
+        }
+        return jsonify(response), 200
     except Error as e:
         conn.close()
         return jsonify({'error': str(e)}), 500

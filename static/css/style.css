@@ -864,14 +864,18 @@ body {
     cursor: pointer;
     transition: all 0.3s;
     text-decoration: none;
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
     text-align: center;
 }
 
 .btn-primary {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: #ffffff;
-    width: 100%;
+    width: auto;
+    min-width: 140px;
 }
 
 .btn-primary:hover {
@@ -901,6 +905,10 @@ body {
 .btn-success:hover {
     transform: translateY(-2px);
     box-shadow: 0 5px 15px rgba(17, 153, 142, 0.4);
+}
+
+.auth-form .btn-primary {
+    width: 100%;
 }
 
 .btn-outline {
@@ -1192,13 +1200,6 @@ body {
     gap: 18px;
 }
 
-.hero-kicker {
-    font-size: 0.85rem;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: rgba(148, 163, 184, 0.85);
-}
-
 .hero-content h1 {
     font-size: clamp(2.2rem, 2.6vw, 2.8rem);
     line-height: 1.1;
@@ -1206,6 +1207,9 @@ body {
 }
 
 .hero-kicker {
+    font-size: 0.85rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
     color: #64748b;
 }
 
@@ -1214,11 +1218,28 @@ body {
     max-width: 85%;
 }
 
+.view-context {
+    padding: 12px 16px;
+    border-radius: 12px;
+    background: rgba(241, 245, 249, 0.8);
+    color: #475569;
+    font-size: 0.95rem;
+}
+
 .hero-actions {
     display: flex;
     flex-wrap: wrap;
     gap: 16px;
     margin-top: 12px;
+}
+
+.hero-actions .btn {
+    flex: 1 1 200px;
+}
+
+.hero-actions .btn-secondary {
+    border: 1px solid rgba(226, 232, 240, 0.8);
+    color: #475569;
 }
 
 .hero-score-card {
@@ -1271,6 +1292,23 @@ body {
 .score-caption {
     color: #64748b;
     font-size: 0.95rem;
+}
+
+.comparison-context {
+    margin-top: 16px;
+    background: rgba(102, 126, 234, 0.08);
+    border: 1px solid rgba(102, 126, 234, 0.2);
+    border-radius: 12px;
+    padding: 16px;
+    color: #475569;
+    text-align: left;
+}
+
+.comparison-score {
+    margin-top: 6px;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #667eea;
 }
 
 .summary-section {
@@ -1425,6 +1463,78 @@ body {
     gap: 24px;
 }
 
+.chart-controls {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.btn-compact {
+    padding: 10px 18px;
+    font-size: 0.9rem;
+}
+
+.history-section {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.history-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.history-entry {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    border-radius: 16px;
+    border: 1px solid rgba(226, 232, 240, 0.8);
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.04);
+    transition: all 0.2s ease;
+}
+
+.history-entry.active {
+    border-color: rgba(102, 126, 234, 0.4);
+    background: rgba(102, 126, 234, 0.08);
+    box-shadow: 0 8px 16px rgba(102, 126, 234, 0.12);
+}
+
+.history-entry-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    color: #475569;
+}
+
+.history-entry-stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 4px;
+    font-size: 0.85rem;
+    color: #667085;
+}
+
+.history-entry-info strong {
+    color: #1e293b;
+    font-size: 1rem;
+}
+
+.history-entry-meta {
+    font-size: 0.85rem;
+    color: #64748b;
+}
+
+.btn-history {
+    min-width: 160px;
+}
+
 .panel-heading {
     display: flex;
     flex-direction: column;
@@ -1572,6 +1682,17 @@ body {
     color: #667eea;
 }
 
+.compatibility-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+}
+
+.compatibility-card-actions {
+    margin-top: 16px;
+}
+
 .compatibility-card h3 {
     font-size: 1.1rem;
     margin-bottom: 4px;
@@ -1581,6 +1702,16 @@ body {
 .compatibility-meta {
     color: #64748b;
     font-size: 0.95rem;
+}
+
+.btn-compare {
+    width: 100%;
+    justify-content: center;
+}
+
+.btn.loading {
+    opacity: 0.7;
+    pointer-events: none;
 }
 
 /* Error Messages */

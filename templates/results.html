@@ -11,12 +11,14 @@
     <div class="page-shell">
         <header class="results-hero glass-card">
             <div class="hero-content">
-                <span class="hero-kicker">Assessment Complete</span>
+                <span class="hero-kicker" id="welcomeMessage">Assessment Complete</span>
                 <h1>Here’s your personalised insight recap</h1>
                 <p class="hero-subtitle">Discover how your strengths translate into study partnerships and future career paths.</p>
+                <div class="view-context" id="viewContext">Showing latest profile snapshot</div>
                 <div class="hero-actions">
                     <a href="/test" class="btn btn-outline">Retake Assessment</a>
                     <a href="/invite" class="btn btn-primary btn-pill">Invite a Friend</a>
+                    <button id="logoutBtn" class="btn btn-secondary btn-pill">Log Out</button>
                 </div>
             </div>
             <div class="hero-score-card">
@@ -26,6 +28,7 @@
                     <div class="score-status" id="overallScoreStatus">Pending</div>
                 </div>
                 <p class="score-caption" id="overallScoreLabel">Complete the personality test to view your aligned score.</p>
+                <div class="comparison-context" id="comparisonContext" style="display: none;"></div>
             </div>
         </header>
 
@@ -47,6 +50,9 @@
                 <div class="panel-heading">
                     <h2>Personality Radar</h2>
                     <p>Visualise how your traits balance across core dimensions.</p>
+                </div>
+                <div class="chart-controls">
+                    <button id="resetChartBtn" class="btn btn-outline btn-compact" style="display: none;">Show My Profile</button>
                 </div>
                 <canvas id="personalityChart"></canvas>
             </div>
@@ -78,6 +84,14 @@
                 <p>Compare your profile with invited peers to find study partners with complementary strengths.</p>
             </div>
             <div class="compatibility-grid" id="compatibilityResults"></div>
+        </section>
+
+        <section class="history-section glass-card" id="historySection" style="display: none;">
+            <div class="panel-heading">
+                <h2>Assessment History</h2>
+                <p>Review past results and revisit any snapshot in one click.</p>
+            </div>
+            <div id="historyList" class="history-list"></div>
         </section>
     </div>
     <script src="{{ url_for('static', filename='js/results.js') }}"></script>

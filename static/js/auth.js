@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     headers: {
                         'Content-Type': 'application/json'
                     },
+                    credentials: 'include',
                     body: JSON.stringify({ username, password })
                 });
 
@@ -46,6 +47,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     headers: {
                         'Content-Type': 'application/json'
                     },
+                    credentials: 'include',
                     body: JSON.stringify({ username, email, password })
                 });
 
@@ -72,6 +74,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 });
+
 
 
 
