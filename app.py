@@ -8,18 +8,38 @@ import string
 from datetime import datetime
 import math
 from decimal import Decimal
+import os
 
 app = Flask(__name__)
 app.secret_key = 'your-secret-key-change-in-production'
 CORS(app)
 
+def _get_env_setting(key, default=None):
+    """Return environment variable if set, otherwise default."""
+    value = os.getenv(key)
+    if value is None or value == "":
+        return default
+    return value
+
+
 # Database configuration
 DB_CONFIG = {
-    'host': 'localhost',
-    'database': 'student_compatibility',
-    'user': 'root',
-    'password': 'nihargowdamp212'  # Change this to your MySQL password
+    'host': _get_env_setting('DB_HOST', 'localhost'),
+    'database': _get_env_setting('DB_NAME', 'student_compatibility'),
+    'user': _get_env_setting('DB_USER', 'root'),
+    'password': _get_env_setting('DB_PASSWORD', 'nihargowdamp212'),
 }
+
+db_port = _get_env_setting('DB_PORT')
+if db_port:
+    try:
+        DB_CONFIG['port'] = int(db_port)
+    except ValueError:
+        print("Invalid DB_PORT value. Falling back to default port 3306.")
+
+db_ssl_ca = _get_env_setting('DB_SSL_CA')
+if db_ssl_ca:
+    DB_CONFIG['ssl_ca'] = db_ssl_ca
 
 print("Loaded DB config:", DB_CONFIG)
 
