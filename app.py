@@ -41,8 +41,6 @@ db_ssl_ca = _get_env_setting('DB_SSL_CA')
 if db_ssl_ca:
     DB_CONFIG['ssl_ca'] = db_ssl_ca
 
-print("Loaded DB config:", DB_CONFIG)
-
 def get_db_connection():
     """Create and return database connection"""
     try:
