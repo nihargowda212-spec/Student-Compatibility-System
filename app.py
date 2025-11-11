@@ -21,6 +21,8 @@ DB_CONFIG = {
     'password': 'nihargowdamp212'  # Change this to your MySQL password
 }
 
+print("Loaded DB config:", DB_CONFIG)
+
 def get_db_connection():
     """Create and return database connection"""
     try:
